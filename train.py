@@ -24,8 +24,7 @@ import logging
 
 
 def get_args():
-    parser = argparse.ArgumentParser(
-        """Implementation of model described in the paper: Proximal Policy Optimization Algorithms for Contra Nes""")
+    parser = argparse.ArgumentParser("""Implementation of model described in the paper: Proximal Policy Optimization Algorithms for Contra Nes""")
     parser.add_argument("--level", type=int, default=1)
     parser.add_argument('--lr', type=float, default=1e-6, help="Learning rate")
     parser.add_argument('--gamma', type=float, default=0.99, help='Discount factor for rewards')
@@ -39,7 +38,7 @@ def get_args():
     parser.add_argument("--num_local_steps", type=int, default=200)
     parser.add_argument("--max_episode_steps", type=int, default=1000)
     parser.add_argument("--num_processes", type=int, default=6)
-    parser.add_argument("--save_interval", type=int, default=10, help="Number of steps between savings")
+    parser.add_argument("--save_interval", type=int, default=1, help="Number of steps between savings")
     parser.add_argument("--max_actions", type=int, default=200, help="Maximum repetition steps in test phase")
     parser.add_argument("--log_path", type=str, default="tensorboard/ppo_contra")
     parser.add_argument("--saved_path", type=str, default="trained_models")

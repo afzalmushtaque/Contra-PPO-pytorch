@@ -135,7 +135,7 @@ def create_train_env(level, max_episode_steps, output_path=None):
     env = gym.make('Contra-v0')
     
     if output_path:
-        monitor = Monitor(240, 224, output_path)
+        monitor = Monitor(240, 256, output_path)
     else:
         monitor = None
     env = TimeLimit(MaxAndSkipEnv(env), max_episode_steps=max_episode_steps)
