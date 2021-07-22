@@ -58,15 +58,15 @@ def train(opt):
     # os.makedirs(opt.log_path)
     if not os.path.isdir(opt.saved_path):
         os.makedirs(opt.saved_path)
-    mp = _mp.get_context("spawn")
+    # mp = _mp.get_context("spawn")
     envs = MultipleEnvironments(opt.level, opt.num_processes, opt.max_episode_steps)
     model = PPO(envs.num_states, envs.num_actions)
     if torch.cuda.is_available():
         model.cuda()
     model.share_memory()
 
-    process = mp.Process(target=test, args=(opt, model, envs.num_states, envs.num_actions, opt.max_episode_steps))
-    process.start()
+    # process = mp.Process(target=test, args=(opt, model, envs.num_states, envs.num_actions, opt.max_episode_steps))
+    # process.start()
     wandb.watch(model, log_freq=10, log_graph=True, log="parameters")
     optimizer = torch.optim.Adam(model.parameters(), lr=opt.lr)
     # optimizer = torch.optim.SGD(model.parameters(), lr=opt.lr)

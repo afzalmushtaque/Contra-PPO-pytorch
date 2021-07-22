@@ -7,6 +7,7 @@ import torch
 from src.env import create_train_env, ACTION_MAPPING
 from src.model import PPO
 import torch.nn.functional as F
+from torch.distributions import Categorical
 
 
 def get_args():
@@ -49,13 +50,15 @@ def test(opt):
         #     state = state.cuda()
         logits, value = model(state)
         policy = F.softmax(logits, dim=1)
-        action = torch.argmax(policy).item()
+        sampler = Categorical(policy)
+        action = sampler.sample().item()
+        # action = torch.argmax(policy).item()
         state, reward, done, info = env.step(action)
         total_reward += reward
         state = torch.from_numpy(state).unsqueeze(dim=0).permute(0,3,1,2)
         env.render()
         if info["level"] > opt.level or done:
-            print("Level {} completed".format(opt.level))
+            print("Level {0} completed with total reward {1:,.2f}".format(opt.level, total_reward))
 
 
 if __name__ == "__main__":
