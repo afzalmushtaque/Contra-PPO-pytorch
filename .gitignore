@@ -1,0 +1,5 @@
+*.pyc
+wandb/
+tensorboard/
+trained_models/
+vision/

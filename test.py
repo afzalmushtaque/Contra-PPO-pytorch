@@ -37,7 +37,7 @@ def test(opt):
         logits, value = model(state)
         policy = F.softmax(logits, dim=1)
         action = torch.argmax(policy).item()
-        state, reward, done, info = env.step(action)
+        state, reward, done, info = env.step(ACTION_MAPPING[action])
         state = torch.from_numpy(state)
         env.render()
         if info["level"] > opt.level or done:
